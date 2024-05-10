@@ -1,0 +1,83 @@
+.container {
+    display: flex;
+    gap: 10px;
+}
+
+.user-form {
+    padding: 20px;
+    flex: 30%;
+    border: 1px solid black;
+    height: 600px;
+}
+
+.user-table {
+    padding: 10px;
+    flex: 70%;
+    border: 1px solid black;
+}
+
+.user-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.user-form form > div {
+    display: flex;
+    gap: 10px;
+}
+
+table {
+    width: 100%;
+    margin: 20px auto;
+    table-layout: auto;
+  }
+  
+  .fixed {
+    table-layout: fixed;
+  }
+  
+  table,
+  td,
+  th {
+    border-collapse: collapse;
+  }
+  
+  th,
+  td {
+    padding: 10px;
+    border: solid 1px;
+    text-align: center;
+  }
+
+  .edit-button:hover {
+    background-color: #545454;
+  }
+
+  .delete-button:hover {
+    background-color: #545454;
+  }
+
+  .field-contianer{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .field-contianer div > label {
+    font-size: 18px;
+    margin-right: 8px;
+  }
+
+  .field-contianer div > input {
+    width: 250px;
+    height: 26px;
+    border: 0.5px solid black;
+    border-radius: 8px;
+  }
+
+  .error-text {
+    font-size: 16px;
+    font-weight: bold;
+    color: red;
+    font-style: italic;
+  }
