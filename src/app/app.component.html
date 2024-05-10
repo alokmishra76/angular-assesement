@@ -43,7 +43,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of userLists">
+        <tr *ngFor="let user of userLists | slice: (pagination.currentPage - 1) * pagination.pageSize: pagination.currentPage * pagination.pageSize">
           <td>{{user.name}}</td>
           <td>{{user.email}}</td>
           <td>{{user.phone}}</td>
@@ -51,6 +51,14 @@
         </tr>
       </tbody>
     </table>
+
+    <app-pagination
+    #pagination
+    [collectionSize]="userLists.length"
+    [pageSize]="10"
+    [firstLastButtons]="true"
+    [maxSize]="2"
+  ></app-pagination>
 
   </div>
 </div>

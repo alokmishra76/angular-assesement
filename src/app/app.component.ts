@@ -101,6 +101,7 @@ export class AppComponent implements OnInit {
     })
     localStorage.setItem('userData', JSON.stringify(updatedUserList));
     this.resetForm();
+    this.update = false;
     this.getUserData();
 
   }
