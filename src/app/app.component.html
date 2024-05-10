@@ -25,8 +25,8 @@
 
       <div class="buttons">
         <button type="reset" (click)="resetForm()">Cancel</button>
-        <button *ngIf="!update" type="submit" (click)="addUser()" [disabled]="isFormValid">Save</button>
-        <button *ngIf="update" type="submit" (click)="updateUser()" [disabled]="isFormValid">Update</button>
+        <button *ngIf="!update" type="submit" (click)="addUser()" [disabled]="!isFormValid">Save</button>
+        <button *ngIf="update" type="submit" (click)="updateUser()" [disabled]="!isFormValid">Update</button>
       </div>
     </form>
   </div>
