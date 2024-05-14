@@ -31,7 +31,6 @@ table {
     width: 100%;
     margin: 20px auto;
     table-layout: auto;
-    min-height: 550px !important;
   }
   
   .fixed {

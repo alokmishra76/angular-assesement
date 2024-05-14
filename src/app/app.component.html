@@ -31,34 +31,37 @@
     </form>
   </div>
 
-  <div class="user-table">
+  <div class="user-table" style="position: relative;">
+    <div style="max-height: 500px; overflow: auto;">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <td>Name<span class="material-icons" style="cursor: pointer;" (click)="sortColumn('name')">arrow_upward</span></td>
+            <td>email<span class="material-icons" style="cursor: pointer;" (click)="sortColumn('email')">arrow_upward</span></td>
+            <td>Phone</td>
+            <td>Actions</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of userLists | slice: (pagination.currentPage - 1) * pagination.pageSize: pagination.currentPage * pagination.pageSize">
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.phone}}</td>
+            <td><i title="Edit" style="cursor: pointer;" class="material-icons edit-botton" (click)="editUser(user)">edit</i><i title="delete" class="material-icons delete-button" style="color: red; cursor: pointer;" (click)="deleteUser(user)">delete</i></td>
+          </tr>
+        </tbody>
+      </table>
 
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <td>Name<span class="material-icons" style="cursor: pointer;" (click)="sortColumn('name')">arrow_upward</span></td>
-          <td>email<span class="material-icons" style="cursor: pointer;" (click)="sortColumn('email')">arrow_upward</span></td>
-          <td>Phone</td>
-          <td>Actions</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of userLists | slice: (pagination.currentPage - 1) * pagination.pageSize: pagination.currentPage * pagination.pageSize">
-          <td>{{user.name}}</td>
-          <td>{{user.email}}</td>
-          <td>{{user.phone}}</td>
-          <td><i title="Edit" style="cursor: pointer;" class="material-icons edit-botton" (click)="editUser(user)">edit</i><i title="delete" class="material-icons delete-button" style="color: red; cursor: pointer;" (click)="deleteUser(user)">delete</i></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <app-pagination
-    #pagination
-    [collectionSize]="userLists.length"
-    [pageSize]="10"
-    [firstLastButtons]="true"
-    [maxSize]="2"
-  ></app-pagination>
+    </div>
+    <div style="position: absolute; bottom: 0px !important;">
+      <app-pagination
+      #pagination
+      [collectionSize]="userLists.length"
+      [pageSize]="10"
+      [firstLastButtons]="true"
+      [maxSize]="2"
+    ></app-pagination>
+    </div>
 
   </div>
 </div>
