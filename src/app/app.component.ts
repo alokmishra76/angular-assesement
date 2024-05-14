@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   userLists: Users[] = [];
   userDetailsForm: FormGroup;
   update: boolean = false;
+  isUserPresent: boolean = false;
 
   constructor() {
     this.userDetailsForm = new FormGroup({
@@ -45,8 +46,29 @@ export class AppComponent implements OnInit {
     return JSON.parse(localStorage.getItem('userData'));
   }
 
+  checkIfUserAlreadyExist(userList: Users[]) {
+    const userInfo: Users = this.userDetailsForm.value;
+    this.isUserPresent = false;
+    userList.forEach(userData => {
+       if(userData.email === userInfo.email) {
+        debugger
+          this.isUserPresent = true
+       }
+        if(userData.phone === userInfo.phone) {
+        this.isUserPresent = true
+       }
+    })
+  }
+
+  setUserData(oldUserList: Users[], userData: Users) {
+    oldUserList.push(userData)
+    localStorage.setItem('userData', JSON.stringify(oldUserList));
+    this.isUserPresent = false;
+    this.resetForm()
+    this.getUserData();
+  }
+
   addUser() {
-    if(!this.update) {
       const empInfo: Users = this.userDetailsForm.value;
       if(!this.isUserListEmpty) {
         const newUserArray: Users[] = [];
@@ -54,12 +76,9 @@ export class AppComponent implements OnInit {
         localStorage.setItem('userData', JSON.stringify(newUserArray));
       } else {
          const oldUserList:Users[] = this.getAllUserLists();
-         oldUserList.push(empInfo)
-         localStorage.setItem('userData', JSON.stringify(oldUserList));
+         this.checkIfUserAlreadyExist(oldUserList);
+         this.isUserPresent === false ? this.setUserData(oldUserList, empInfo): null
       }
-      this.resetForm()
-      this.getUserData();
-    }
   }
 
   resetForm() {

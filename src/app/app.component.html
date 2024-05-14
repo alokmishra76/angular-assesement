@@ -28,6 +28,7 @@
         <button *ngIf="!update" type="submit" (click)="addUser()" [disabled]="!isFormValid">Save</button>
         <button *ngIf="update" type="submit" (click)="updateUser()" [disabled]="!isFormValid">Update</button>
       </div>
+      <div *ngIf="isUserPresent"><span class="error-text">User already Exist</span></div>
     </form>
   </div>
 
