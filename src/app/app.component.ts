@@ -29,24 +29,24 @@ export class AppComponent implements OnInit {
     this.generateUniqueId()
   }
 
-  getUserData() {
+  private getUserData() {
     this.userLists = this.getAllUserLists();
   }
 
-  generateUniqueId() {
+  private generateUniqueId() {
     let myuuid = uuidv4();
     return myuuid
   }
 
-  get isUserListEmpty() {
+  private get isUserListEmpty() {
     return localStorage.getItem('userData') === null ? false : localStorage.getItem('userData').length > 0;
   }
 
-  getAllUserLists() {
+  public getAllUserLists() {
     return JSON.parse(localStorage.getItem('userData'));
   }
 
-  checkIfUserAlreadyExist(userList: Users[]) {
+  private checkIfUserAlreadyExist(userList: Users[]) {
     const userInfo: Users = this.userDetailsForm.value;
     this.isUserPresent = false;
     userList.forEach(userData => {
@@ -60,7 +60,7 @@ export class AppComponent implements OnInit {
     })
   }
 
-  setUserData(oldUserList: Users[], userData: Users) {
+  private setUserData(oldUserList: Users[], userData: Users) {
     oldUserList.push(userData)
     localStorage.setItem('userData', JSON.stringify(oldUserList));
     this.isUserPresent = false;
@@ -68,7 +68,7 @@ export class AppComponent implements OnInit {
     this.getUserData();
   }
 
-  addUser() {
+  public addUser() {
       const empInfo: Users = this.userDetailsForm.value;
       if(!this.isUserListEmpty) {
         const newUserArray: Users[] = [];
@@ -81,7 +81,7 @@ export class AppComponent implements OnInit {
       }
   }
 
-  resetForm() {
+  public resetForm() {
     this.userDetailsForm = new FormGroup({
       id: new FormControl(this.generateUniqueId()),
       name: new FormControl("", [Validators.required]),
@@ -91,11 +91,11 @@ export class AppComponent implements OnInit {
     this.update = false;
   }
 
-  get isFormValid() {
+  public get isFormValid() {
     return this.userDetailsForm.valid;
   }
 
-  editUser(user: Users) {
+  public editUser(user: Users) {
      this.update = true;
      this.userDetailsForm.setValue({
       id: user.id,
@@ -105,7 +105,7 @@ export class AppComponent implements OnInit {
      });
   }
 
-  updateUser() {
+  public updateUser() {
     let updatedUser: Users = this.userDetailsForm.value;
     const updatedUserList = this.userLists.map((data: Users) => {
      if(data.id === updatedUser.id) {
@@ -126,7 +126,7 @@ export class AppComponent implements OnInit {
 
   }
 
-  deleteUser(user: Users) {
+  public deleteUser(user: Users) {
     const result = window.confirm(`Are you Sure You want to delete ${user.name}`);
     if(result === true) {
       const filteredUserList = this.userLists.filter((res: Users) => res.id !== user.id);
@@ -135,7 +135,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  sortColumn(columnName: string) {
+  public sortColumn(columnName: string) {
     if(columnName === 'name') {
       this.userLists = this.userLists.sort((a, b) => a.name.localeCompare(b.name))
     }
